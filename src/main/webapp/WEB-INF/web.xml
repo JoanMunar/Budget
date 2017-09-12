@@ -1,0 +1,77 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>Archetype Created Web Application</display-name>
+  <!--Servlet-->
+  <servlet>
+    <servlet-name>BudgetList</servlet-name>
+    <servlet-class>controllers.BudgetControllerForm</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>BudgetLine</servlet-name>
+    <servlet-class>controllers.BudgetLineControllerForm</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>LogOut</servlet-name>
+    <servlet-class>controllers.LogOut</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>CreateBudget</servlet-name>
+    <servlet-class>controllers.CreateBudgetControllerForm</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>CreateBudgetLine</servlet-name>
+    <servlet-class>controllers.CreateBudgetLineControllerForm</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>DeleteBudget</servlet-name>
+    <servlet-class>controllers.DeleteBudgetForm</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>Home</servlet-name>
+    <servlet-class>controllers.HomeController</servlet-class>
+  </servlet>
+
+  <!--Mapping-->
+  <servlet-mapping>
+    <servlet-name>BudgetList</servlet-name>
+    <url-pattern>/BudgetList</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BudgetLine</servlet-name>
+    <url-pattern>/BudgetLine</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LogOut</servlet-name>
+    <url-pattern>/LogOut</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>CreateBudget</servlet-name>
+    <url-pattern>/CreateBudget</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>CreateBudgetLine</servlet-name>
+    <url-pattern>/CreateBudgetLine</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>DeleteBudget</servlet-name>
+    <url-pattern>/DeleteBudget</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>Home</servlet-name>
+    <url-pattern>/Home</url-pattern>
+  </servlet-mapping>
+</web-app>
