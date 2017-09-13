@@ -2,8 +2,6 @@
 
 <form action="CreateBudget" method="post">
     <h4>Afegir nou presupost</h4>
-    <label>Codi presupost:</label>
-    <input type="text" name="id">
 
     <input type="submit" value="Afegir!">
 

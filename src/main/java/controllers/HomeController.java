@@ -35,7 +35,7 @@ public class HomeController extends HttpServlet{
         User user = (User) session.getAttribute("user");
 
         try {
-            budgetList = bdi.budget(user.getId());
+            budgetList = bdi.budgetIdList(user.getId());
         } catch (SQLException e) {
             e.printStackTrace();
         }

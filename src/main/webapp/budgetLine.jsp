@@ -13,6 +13,7 @@
     <p>Numero Presupost:<tag:budgetNum></tag:budgetNum></p>
     <tag:budgetDate></tag:budgetDate>
 
-    <tag:budgetLine></tag:budgetLine>
+    <tag:budgetLine></tag:budgetLine><br>
+    <a href="/Home">Tornar enrera</a>
 </body>
 </html>

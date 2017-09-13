@@ -4,7 +4,7 @@ package dao;
 import com.mysql.jdbc.PreparedStatement;
 import dbc.ConnectionFactory;
 import pojo.Budget;
-import pojo.Budget_line;
+import pojo.BudgetLine;
 import pojo.User;
 
 import java.sql.ResultSet;
@@ -18,21 +18,24 @@ public class BudgetDaoImplements implements BudgetDao{
     private ConnectionFactory dbc;
 
 
-    public void createBudget(int id_budget, Date data, int id_user) throws SQLException {
+    public int createBudget(Date data, int id_user) throws SQLException {
 
-        String sql = "INSERT into pfinal.budget VALUES(?,?,?)";
+        String sql = "INSERT into pfinal.budget VALUES(DEFAULT,?,?)";
 
         PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
 
-        ps.setInt(1, id_budget);
         try {
-            ps.setDate(2, (java.sql.Date) data);
+            ps.setDate(1, (java.sql.Date) data);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        ps.setInt(3, id_user);
+        ps.setInt(2, id_user);
 
         ps.execute();
+
+        ResultSet rs = ps.getGeneratedKeys();
+        rs.next();
+        int id_budget = rs.getInt(1);
 
         if (dbc != null) {
             try {
@@ -41,20 +44,19 @@ public class BudgetDaoImplements implements BudgetDao{
             /* Ignore */
             }
         }
-
+        return id_budget;
     }
 
-    public void createBudgetLine(int code, String name, int units, int price, int id_budget) throws SQLException {
+    public void createBudgetLine(String name, int units, double price, int id_budget) throws SQLException {
 
-        String sql = "INSERT into pfinal.budget_line VALUES(?,?,?,?,?)";
+        String sql = "INSERT into pfinal.budget_line VALUES(DEFAULT,?,?,?,?)";
 
         PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
 
-        ps.setInt(1, code);
-        ps.setString(2,name);
-        ps.setInt(3, units);
-        ps.setInt(4, price);
-        ps.setInt(5,id_budget);
+        ps.setString(1,name);
+        ps.setInt(2, units);
+        ps.setDouble(3, price);
+        ps.setInt(4,id_budget);
 
         ps.execute();
 
@@ -112,7 +114,7 @@ public class BudgetDaoImplements implements BudgetDao{
     }
 
 
-    public List<Budget> budget(int userCode) throws SQLException {
+    public List<Budget> budgetIdList(int userCode) throws SQLException {
         String sql = "SELECT id_budget FROM pfinal.budget,pfinal.user WHERE budget.id_user=user.id_user and user.id_user=?";
         List<Budget> budgetList = new ArrayList<Budget>();
 
@@ -121,9 +123,9 @@ public class BudgetDaoImplements implements BudgetDao{
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
 
-            int budgetCode = rs.getInt("budget.id_budget");
+            int budgetId = rs.getInt("budget.id_budget");
 
-            Budget budget = new Budget(budgetCode);
+            Budget budget = new Budget(budgetId);
             budgetList.add(budget);
 
         }
@@ -158,60 +160,9 @@ public class BudgetDaoImplements implements BudgetDao{
         return null;
     }
 
-    public List<Budget> budgetId(int id) throws SQLException {
-        String sql = "SELECT budget.id_budget FROM pfinal.budget,pfinal.budget_line WHERE budget.id_budget = budget_line.id_budget and budget_line.id_budget=?";
-        List<Budget> budgetList = new ArrayList<Budget>();
-
-        PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
-        ps.setInt(1,id);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-
-            int budgetCode = rs.getInt("budget.id_budget");
-
-            Budget budget = new Budget(budgetCode);
-            budgetList.add(budget);
-
-        }
-        if (dbc != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-            /* Ignore */
-            }
-        }
-        return budgetList;
-    }
-
-    public List<Budget> getBudgetUserId(int id_budget) throws SQLException {
-
-        String sql = "SELECT * FROM pfinal.budget WHERE budget.id_budget=?";
-        List<Budget> budgetList = new ArrayList<Budget>();
-
-        PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
-        ps.setInt(1,id_budget);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-
-            int user_id = rs.getInt("budget.id_user");
-
-            Budget budget = new Budget(user_id);
-            budgetList.add(budget);
-
-        }
-        if (dbc != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-            /* Ignore */
-            }
-        }
-        return budgetList;
-    }
-
-    public List<Budget_line> budgetLineId(int id_budget) throws SQLException {
+    public List<BudgetLine> budgetLineId(int id_budget) throws SQLException {
         String sql = "SELECT * FROM pfinal.budget_line WHERE budget_line.id_budget=?";
-        List<Budget_line> budgetLine = new ArrayList<Budget_line>();
+        List<BudgetLine> budgetLine = new ArrayList<BudgetLine>();
         PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
         ps.setInt(1,id_budget);
         ResultSet rs = ps.executeQuery();
@@ -223,7 +174,7 @@ public class BudgetDaoImplements implements BudgetDao{
             double budgetPrice = rs.getDouble("budget_line.price");
             int budgetId = rs.getInt("budget_line.id_budget");
 
-            Budget_line budget_line = new Budget_line(budgetCode, budgetName,budgetUnits, budgetPrice, budgetId);
+            BudgetLine budget_line = new BudgetLine(budgetCode, budgetName,budgetUnits, budgetPrice, budgetId);
             budgetLine.add(budget_line);
 
         }

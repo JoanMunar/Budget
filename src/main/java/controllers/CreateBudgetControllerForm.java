@@ -26,7 +26,6 @@ public class CreateBudgetControllerForm extends HttpServlet {
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id_budget = req.getParameter("id");
         User user;
         int id_user;
         Date ld = new Date();
@@ -39,14 +38,17 @@ public class CreateBudgetControllerForm extends HttpServlet {
         //Obtenir data en yyyy-MM
         Date date = new java.sql.Date(ld.getTime());
 
-        if(id_budget != null || date != null) {
-
+        if(date != null) {
+            Integer idBudget = null;
             try {
-                bdi.createBudget(Integer.parseInt(id_budget), date, id_user);
+                 idBudget = bdi.createBudget(date, id_user);
             } catch (SQLException e) {
                 e.printStackTrace();
                 resp.sendRedirect("/createError.jsp");
             }
+
+
+            session.setAttribute("idBudget",idBudget);
 
             resp.sendRedirect("/createSuccess.jsp");
 

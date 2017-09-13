@@ -2,20 +2,15 @@ package controllers;
 
 
 import dao.BudgetDaoImplements;
-import models.Authenticator;
-import models.Status;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import pojo.Budget;
-import pojo.Budget_line;
-import pojo.User;
+import pojo.BudgetLine;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -24,7 +19,7 @@ import java.util.List;
 
 public class BudgetLineControllerForm extends HttpServlet {
 
-    private List<Budget_line> budgetLine = new ArrayList<Budget_line>();
+    private List<BudgetLine> budgetLine = new ArrayList<BudgetLine>();
     private Date budgetDate;
     private static ApplicationContext appC = new ClassPathXmlApplicationContext("spring-conf.xml");
 

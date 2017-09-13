@@ -1,7 +1,7 @@
 package pojo;
 
 
-public class Budget_line {
+public class BudgetLine {
 
     private int code;
     private String name;
@@ -9,7 +9,7 @@ public class Budget_line {
     private double price;
     private int id;
 
-    public Budget_line(int budgetCode, String budgetName, double budgetUnits, double budgetPrice, int budgetId) {
+    public BudgetLine(int budgetCode, String budgetName, double budgetUnits, double budgetPrice, int budgetId) {
 
             this.code = budgetCode;
             this.name = budgetName;
@@ -18,7 +18,7 @@ public class Budget_line {
             this.id = budgetId;
     }
 
-    public Budget_line(int budgetId){
+    public BudgetLine(int budgetId){
         this.code = budgetId;
     }
 
