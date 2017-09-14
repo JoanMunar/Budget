@@ -39,6 +39,11 @@
     <servlet-class>controllers.HomeController</servlet-class>
   </servlet>
 
+  <servlet>
+    <servlet-name>ErrorHandler</servlet-name>
+    <servlet-class>controllers.ErrorHandler</servlet-class>
+  </servlet>
+
   <!--Mapping-->
   <servlet-mapping>
     <servlet-name>BudgetList</servlet-name>
@@ -74,4 +79,16 @@
     <servlet-name>Home</servlet-name>
     <url-pattern>/Home</url-pattern>
   </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ErrorHandler</servlet-name>
+    <url-pattern>/ErrorHandler</url-pattern>
+  </servlet-mapping>
+
+  <!--Error page-->
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/ErrorHandler</location>
+  </error-page>
+
 </web-app>

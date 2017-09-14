@@ -27,10 +27,10 @@ public class CreateBudgetLineControllerForm extends HttpServlet {
         HttpSession session = req.getSession();
         Integer id = (Integer) session.getAttribute("idBudget");
 
-        if(id != null || name != null || units != null || price != null) {
+        if(name != null || units != null || price != null) {
 
             try {
-                bdi.createBudgetLine(name, Integer.parseInt(units), Double.parseDouble(price), id);
+                bdi.createBudgetLine(name, Integer.parseInt(units), Double.parseDouble(price.replaceAll(",",".")), id);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -38,7 +38,7 @@ public class CreateBudgetLineControllerForm extends HttpServlet {
             resp.sendRedirect("/createSuccess.jsp");
 
         }else {
-            resp.sendRedirect("/createError.jsp");
+            resp.sendRedirect("/errorForm.jsp");
         }
 
     }

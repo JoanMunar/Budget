@@ -70,7 +70,7 @@ public class BudgetDaoImplements implements BudgetDao{
     }
     public void deleteBudget(int id_budget) throws SQLException {
 
-        String sql = "DELETE FROM pfinal.budget WHERE id_budget=?";
+        String sql = "DELETE FROM pfinal.budget_line WHERE id_budget=?";
 
         PreparedStatement ps = (PreparedStatement) dbc.getConnection().prepareStatement(sql);
         ps.setInt(1, id_budget);
